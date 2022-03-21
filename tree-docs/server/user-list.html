@@ -1,0 +1,42 @@
+<div class="container">
+    <hr>
+    <h1>List of Users</h1>
+    <hr>
+    <div>
+        <div class="row" id="users">
+        </div>
+    </div>
+</div>
+
+<div id="editUserModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form id="editForm" method="POST">
+                    <div class="form-group">
+                        <label for="uid">UID</label>
+                        <input class="form-control" name="uid" id="uid">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="full_name">Full Name</label>
+                        <input class="form-control" name="full_name" id="full_name">
+                    </div>
+
+                    <!--Other fields-->
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Our JS file-->
+<script src="user-list.js"></script>
