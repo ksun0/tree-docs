@@ -2,6 +2,7 @@ import { getTree } from "../api/Database";
 import { Container } from 'semantic-ui-react'
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import NavBar from "./NavBar";
 import * as d3 from "d3"
 
 function TreeView() {
@@ -20,14 +21,14 @@ function TreeView() {
       title, // given a node d, returns its hover text
       link, // given a node d, its link (if any)
       linkTarget = "_blank", // the target attribute for links (if any)
-      width = 640, // outer width, in pixels
+      width = 1000, // outer width, in pixels
       height, // outer height, in pixels
-      r = 3, // radius of nodes
+      r = 4, // radius of nodes
       padding = 1, // horizontal padding for first and last column
-      fill = "#999", // fill for nodes
+      fill = "#6fc754", // fill for nodes
       fillOpacity, // fill opacity for nodes
       stroke = "#555", // stroke for links
-      strokeWidth = 1.5, // stroke width for links
+      strokeWidth = 2.5, // stroke width for links
       strokeOpacity = 0.4, // stroke opacity for links
       strokeLinejoin, // stroke line join for links
       strokeLinecap, // stroke line cap for links
@@ -52,7 +53,7 @@ function TreeView() {
       if (sort != null) root.sort(sort);
 
       // Compute the layout.
-      const dx = 10;
+      const dx = 40;
       const dy = width / (root.height + padding);
       tree().nodeSize([dx, dy])(root);
 
@@ -72,7 +73,7 @@ function TreeView() {
           .attr("height", height)
           .attr("style", "max-width: 100%; height: auto; height: intrinsic;")
           .attr("font-family", "sans-serif")
-          .attr("font-size", 10);
+          .attr("font-size", 20);
 
       svg.append("g")
           .attr("fill", "none")
@@ -104,7 +105,7 @@ function TreeView() {
           .text(d => title(d.data, d));
 
       if (L) node.append("text")
-          .attr("dy", "0.32em")
+          .attr("dy", "0.3em")
           .attr("x", d => d.children ? -6 : 6)
           .attr("text-anchor", d => d.children ? "end" : "start")
           .text((d, i) => L[i])
@@ -138,10 +139,28 @@ function TreeView() {
      }, [])
 
     return (
-        <Container style={{marginTop: "50px"}}>
-            <svg ref = {ref} />
-         </Container>
-        
+      <>
+        <NavBar light={true}/>
+        <div id="hero" class="hero overlay subpage-hero tree-hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Tree View</h1>
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="/">Home</a></li>
+                  <li class="breadcrumb-item">Tree View</li>
+                </ol>
+            </div>
+            </div>
+        </div>
+        <main id="main" class="site-main">
+
+          <section class="site-section subpage-site-section section-portfolio">
+            <div class="container">
+              <svg ref = {ref} />
+            </div>
+          </section>
+        </main>
+      </>
 
     )
 }

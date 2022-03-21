@@ -1,8 +1,8 @@
-import './App.css';
 import DocumentEditor from "./components/DocumentEditor";
+import Home from "./components/Home";
 import DocumentList from "./components/DocumentList";
 import TreeView from "./components/TreeView";
-import 'semantic-ui-css/semantic.min.css'
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -19,7 +19,9 @@ function App() {
           {/* This route is for home component 
           with exact path "/", in component props 
           we passes the imported component*/}
-          <Route exact path="/" element={<DocumentList/>} />
+          <Route exact path="/" element={<Home/>} />
+
+          <Route exact path="/list" element={<DocumentList/>} />
             
           {/* This route is for about component 
           with exact path "/about", in component 
@@ -33,6 +35,10 @@ function App() {
             
         </Routes>
       </Router>
+
+
+
+      
     </>
   );
 }
