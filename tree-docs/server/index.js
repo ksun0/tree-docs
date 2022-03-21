@@ -1,10 +1,11 @@
 const mysql = require('mysql');
+const dbConfig = require('./db.config.js');
 
 const con = mysql.createConnection({
-    host: "tree-docs.c1eu89hjpaa7.us-east-1.rds.amazonaws.com",
-    user: "admin",
-    password: "password",
-    port: "3306"
+    host: dbConfig.host,
+    user: dbConfig.user,
+    password: dbConfig.password,
+    port: dbConfig.port
 });
 
 con.connect(function(err) {
@@ -26,4 +27,3 @@ con.connect(function(err) {
     });
     con.end();
 });
-
