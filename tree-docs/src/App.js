@@ -2,6 +2,7 @@ import DocumentEditor from "./components/DocumentEditor";
 import Home from "./components/Home";
 import DocumentList from "./components/DocumentList";
 import TreeView from "./components/TreeView";
+import SideTree from "./components/SideTree";
 
 import {
   BrowserRouter as Router,
