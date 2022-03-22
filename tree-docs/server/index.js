@@ -1,29 +1,18 @@
-const mysql = require('mysql');
-const dbConfig = require('./db.config.js');
+const express = require('express')
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
-const con = mysql.createConnection({
-    host: dbConfig.host,
-    user: dbConfig.user,
-    password: dbConfig.password,
-    port: dbConfig.port
-});
+const app = express();
+app.use(cors());
+const mountRoutes = require('./routes')
+mountRoutes(app);
 
-con.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
+// Configuring body parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-    con.query('CREATE DATABASE IF NOT EXISTS treedocs;');
-    con.query('USE treedocs;');
-    con.query('CREATE TABLE IF NOT EXISTS users(id int NOT NULL AUTO_INCREMENT, username varchar(30), email varchar(255), age int, PRIMARY KEY(id));', function(error, result, fields) {
-        console.log(result);
-    });
-    con.query(`SELECT * FROM treedocs.users`, function(err, result, fields) {
-        if (err) {
-            console.log(err);
-        }
-        if (result) {
-            console.log(result);
-        }
-    });
-    con.end();
-});
+const port = 3000;
+
+
+app.listen(port, () => console.log(`Hello world app listening on port ${port}!`));
+

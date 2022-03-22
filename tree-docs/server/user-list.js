@@ -36,20 +36,21 @@ const loadUsers = () => {
     xhttp.send();
 
     const users = JSON.parse(xhttp.responseText);
+    console.log(users);
 
     for (let user of users) {
         const x = `
             <div class="col-4">
                 <div class="card">
                     <div class="card-body">
-                        <h6 class="card-subtitle mb-2 text-muted">${user.uid}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">${user.UID}</h6>
                         <h5 class="card-title">${user.full_name}</h5>
                         <div>More Info</div>
                         <hr>
 
-                        <button type="button" class="btn btn-danger" onClick="deleteUser(${user.uid})">Delete</button>
+                        <button type="button" class="btn btn-danger" onClick="deleteUser(${user.UID})">Delete</button>
                         <button types="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#editUserModal" onClick="setEditModal(${user.uid})">
+                            data-target="#editUserModal" onClick="setEditModal(${user.UID})">
                             Edit
                         </button>
                     </div>

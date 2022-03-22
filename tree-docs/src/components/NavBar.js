@@ -16,8 +16,9 @@ function NavBar(props) {
                 <div class="collapse navbar-collapse" id="agency-navbar-collapse">
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/" data-toggle="dropdown">Home</a></li>
+                        <li><a href="/">Home</a></li>               
                         <li><a href="/list">Documents</a></li>
+
                     </ul>
 
                 </div>
