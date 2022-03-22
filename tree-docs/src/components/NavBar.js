@@ -13,6 +13,16 @@ function NavBar(props) {
 
                 </div>
 
+                <div class="collapse navbar-collapse" id="agency-navbar-collapse">
+
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li><a href="/">Home</a></li>
+
+                    </ul>
+
+                </div>
+
             </div>   
         </nav>
     </header>
