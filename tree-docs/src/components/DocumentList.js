@@ -3,7 +3,7 @@ import { getDocuments } from "../api/Database";
 import { ListItemButton } from "@mui/material"
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendar, faUser, faFolderBlank } from '@fortawesome/free-solid-svg-icons'
+import { faCalendar, faUser, faFolderBlank, faFile } from '@fortawesome/free-solid-svg-icons'
 import NavBar from "./NavBar";
 import { Container } from 'semantic-ui-react';
 
@@ -15,6 +15,7 @@ function DocumentList() {
     let navigate = useNavigate();
 
     function handleItemClick(id) {
+        console.log(id);
         navigate("/tree", { state: { nodeID : id }});
     }
 
@@ -43,7 +44,7 @@ function DocumentList() {
                         <ListItemButton selected={alt} component="a" onClick={ () => handleItemClick(document.id) }>
                         <Container style={{marginTop: "20px", marginBottom: "20px"}}>
                             <article class="blog-post">
-                            <h3 class="post-title"><FontAwesomeIcon icon={faFolderBlank} /> {document.name}</h3>
+                            <h3 class="post-title"><FontAwesomeIcon icon={faFile} /> {document.name}</h3>
                             <div class="post-meta">
                                 <span class="post-author">
                                 <FontAwesomeIcon icon={faUser} />  {document.author}
