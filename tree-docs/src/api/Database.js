@@ -4,25 +4,32 @@
  * TODO: Implement document 
  */
 function getDocuments() {
-    let test1 = {
-        id: 1,
-        name: "Test 1",
-        author: "John Doe",
-        date: "September 30, 2021",
-    };
-    let test2 = {
-        id: 2,
-        name: "Test 2",
-        author: "Sara Ma",
-        date: "September 30, 2021",
-    };
-    let test3 = {
-        id: 3,
-        name: "Test 3",
-        author: "Allison Smith",
-        date: "September 30, 2021",
-    };
-    return [test1, test2, test3];
+    // let test1 = {
+    //     id: 1,
+    //     name: "Test 1",
+    //     author: "John Doe",
+    //     date: "September 30, 2021",
+    // };
+    // let test2 = {
+    //     id: 2,
+    //     name: "Test 2",
+    //     author: "Sara Ma",
+    //     date: "September 30, 2021",
+    // };
+    // let test3 = {
+    //     id: 3,
+    //     name: "Test 3",
+    //     author: "Allison Smith",
+    //     date: "September 30, 2021",
+    // };
+
+    const xhttp = new XMLHttpRequest();
+
+    xhttp.open("GET", "http://localhost:3000/documents", false);
+    xhttp.send();
+
+    const documents = JSON.parse(xhttp.responseText);
+    return documents;
 }
 
 /*
@@ -50,36 +57,44 @@ function getSummary(did) {
 
 function getTree(root_did) {
     // Need to join Hierarchy, Documents, + Users
-    let data = [
-        {   child_did: 2,
-            parent_did: 1,
-            author_name: "Bob"
-        },
-        {   child_did: 3,
-            parent_did: 1,
-            author_name: "Maria"
-        },
-        {   child_did: 4,
-            parent_did: 2,
-            author_name: "Clarisse"
-        },
-        {   child_did: 5,
-            parent_did: 4,
-            author_name: "Tom"
-        },
-        {   child_did: 6,
-            parent_did: 1,
-            author_name: "Larry"
-        },
-        {   child_did: 7,
-            parent_did: 1,
-            author_name: "David"
-        },
-        {   child_did: 8,
-            parent_did: 2,
-            author_name: "Anya"
-        },
-    ];
+    // let data = [
+    //     {   child_did: 2,
+    //         parent_did: 1,
+    //         author_name: "Bob"
+    //     },
+    //     {   child_did: 3,
+    //         parent_did: 1,
+    //         author_name: "Maria"
+    //     },
+    //     {   child_did: 4,
+    //         parent_did: 2,
+    //         author_name: "Clarisse"
+    //     },
+    //     {   child_did: 5,
+    //         parent_did: 4,
+    //         author_name: "Tom"
+    //     },
+    //     {   child_did: 6,
+    //         parent_did: 1,
+    //         author_name: "Larry"
+    //     },
+    //     {   child_did: 7,
+    //         parent_did: 1,
+    //         author_name: "David"
+    //     },
+    //     {   child_did: 8,
+    //         parent_did: 2,
+    //         author_name: "Anya"
+    //     },
+    // ];
+
+    const xhttp = new XMLHttpRequest();
+
+    xhttp.open("GET", "http://localhost:3000/get_tree/" + root_did, false);
+    xhttp.send();
+
+    const data = JSON.parse(xhttp.responseText);
+    console.log(data);
 
     let graphRep = data.reduce((graph, record) => {
         if (!graph[record.child_did]) {
