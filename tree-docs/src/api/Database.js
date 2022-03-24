@@ -4,31 +4,31 @@
  * TODO: Implement document 
  */
 function getDocuments() {
-    // let test1 = {
-    //     id: 1,
-    //     name: "Test 1",
-    //     author: "John Doe",
-    //     date: "September 30, 2021",
-    // };
-    // let test2 = {
-    //     id: 2,
-    //     name: "Test 2",
-    //     author: "Sara Ma",
-    //     date: "September 30, 2021",
-    // };
-    // let test3 = {
-    //     id: 3,
-    //     name: "Test 3",
-    //     author: "Allison Smith",
-    //     date: "September 30, 2021",
-    // };
+    let test1 = {
+        id: 1,
+        name: "Test 1",
+        author: "John Doe",
+        date: "September 30, 2021",
+    };
+    let test2 = {
+        id: 2,
+        name: "Test 2",
+        author: "Sara Ma",
+        date: "September 30, 2021",
+    };
+    let test3 = {
+        id: 3,
+        name: "Test 3",
+        author: "Allison Smith",
+        date: "September 30, 2021",
+    };
 
-    const xhttp = new XMLHttpRequest();
+    // const xhttp = new XMLHttpRequest();
 
-    xhttp.open("GET", "http://localhost:3000/documents", false);
-    xhttp.send();
+    // xhttp.open("GET", "http://localhost:3000/documents", false);
+    // xhttp.send();
 
-    const documents = JSON.parse(xhttp.responseText);
+    // const documents = JSON.parse(xhttp.responseText);
     return documents;
 }
 
