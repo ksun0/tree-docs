@@ -22,6 +22,7 @@ function DiffView() {
 
         var tempFinal = [];
 
+        // todo: populate equal chunks
         data.rows.forEach((row) => {
             tempFinal.push(Array(row.left.chunks.length).fill(""));
         });
@@ -32,22 +33,25 @@ function DiffView() {
     }, []);
 
     function selectVersion(row, chunk, side) {
+
+        console.log(diff.rows[row].left.chunks[chunk].value)
+
         var tempFinal = [...final];
         tempFinal[row][chunk] = side
-            ? diff.rows[row].left.chunks[chunk].left
-            : diff.rows[row].left.chunks[chunk].right;
+            ? diff.rows[row].right.chunks[chunk].value
+            : diff.rows[row].left.chunks[chunk].value;
         setFinal(tempFinal);
     }
 
     return (
-        <>
+        <main style={{display: "flex", flexDirection: "column"}}>
             <NavBar />
 
-            <div>
+            <div style={{display: "flex", flexDirection: "column", padding: "20px"}}>
                 {diff != null &&
                     diff.rows.map((value, index) => (
-                        <div>
-                            <div>
+                        <div style={{display: "flex", flexDirection: "row", padding: "20px", alignItems: "center"}}>
+                            <div style={{width: "33%"}}>
                                 {value.left.chunks.map((chunk, chunkIndex) => {
                                     if (chunk.type === "equal") {
                                         return (<span>{chunk.value}</span>)
@@ -66,7 +70,7 @@ function DiffView() {
                                     }
                                 })}
                             </div>
-                            <div>
+                            <div style={{width: "33%"}}>
                                 {value.right.chunks.map((chunk, chunkIndex) => {
                                     if (chunk.type === "equal") {
                                         return (<span>{chunk.value}</span>)
@@ -85,11 +89,11 @@ function DiffView() {
                                     }
                                 })}
                             </div>
-                            <div>{final != null && final[index].join("")}</div>
+                            <div style={{width: "33%"}}>{final != null && final[index].join("")}</div>
                         </div>
                     ))}
             </div>
-        </>
+        </main>
     );
 }
 
