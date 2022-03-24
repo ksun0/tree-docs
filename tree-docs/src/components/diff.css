@@ -1,0 +1,60 @@
+.diff-table {
+  font-family: monospace;
+  background: #FFFFFF;
+  font-size: 1.3rem;
+  border-collapse: collapse;
+}
+
+.side-content-header {
+  width: 50%;
+}
+
+.diff-row {
+ outline: 0;
+}
+
+.diff-line-number {
+ color: #999;
+ padding: 0 8px 0 5px;
+ text-align: right;
+ vertical-align: top;
+}
+
+.diff-line-number:before {
+ content: attr(data-content);
+}
+
+.diff-line {
+  white-space: pre-wrap;
+  word-break: break-all;
+  line-height: 2rem;
+  padding-right: 20px;
+}
+
+.diff-line-inserted {
+  background: #B5EFDB;
+}
+
+.diff-line-removed {
+  background: #FFC4C1;
+}
+
+.diff-line-empty {
+  background: #EAEEF0;
+}
+
+.diff-line-modified.diff-line-with-inserts {
+  background: #B5EFDB;
+}
+
+.diff-line-modified.diff-line-with-removes {
+  background: #FFC4C1;
+}
+
+.diff-chunk-inserted {
+  background: #6BDFB8;
+}
+
+.diff-chunk-removed {
+  background: #FF8983;
+}

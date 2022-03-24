@@ -193,4 +193,21 @@ async function getDiff(did1, did2) {
     return promiseData;
 }
 
-export {getDocuments, getTree, getDocument, getDiff};
+async function getDiff_html(did1, did2) {
+
+    let did1body = getDocument(did1).body;
+    let did2body = getDocument(did2).body;
+
+    const promise = axios.post("https://api.diffchecker.com/public/text?output_type=html_json&email=gsr.coolest@gmail.com", {
+        output_type: "html_json",
+        email: "gsr.coolest@gmail.com",
+        left: did1body,
+        right: did2body
+    })
+
+    const promiseData = await promise.then((response) => response.data);
+
+    return promiseData;
+}
+
+export {getDocuments, getTree, getDocument, getDiff, getDiff_html};

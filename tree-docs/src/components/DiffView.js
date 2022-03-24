@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { getDiff } from "../api/Database";
+import { getDiff, getDiff_html } from "../api/Database";
 import NavBar from "../components/NavBar";
+import css from "../components/diff.css";
 
 function DiffView() {
     // const [searchParams] = useSearchParams();
@@ -13,9 +14,14 @@ function DiffView() {
 
     const [diff, setDiff] = useState(null);
     const [final, setFinal] = useState(null);
+    const [html_ret, setHtml]  = useState(null);
 
     useEffect(async () => {
         const data = await getDiff(did1, did2);
+
+        const html = await getDiff_html(did1, did2);
+        console.log(html);
+        setHtml(html);
 
         setDiff(data);
         console.log(data);
@@ -41,9 +47,24 @@ function DiffView() {
 
     return (
         <>
-            <NavBar />
+            <NavBar light={true}/>
+            <div id="hero" class="hero overlay subpage-hero blog-hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Merge Documents</h1>
+                    <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item">Documents</li>
+                    </ol>
+                    </div>
+                </div>
+            </div>
+            <div style = {{paddingTop: "50px"}}>
+                <div dangerouslySetInnerHTML={{__html: html_ret == null ? '' : html_ret.html}} />    
+            </div>
+            
 
-            <div>
+            {/* <div>
                 {diff != null &&
                     diff.rows.map((value, index) => (
                         <div>
@@ -88,7 +109,7 @@ function DiffView() {
                             <div>{final != null && final[index].join("")}</div>
                         </div>
                     ))}
-            </div>
+            </div> */}
         </>
     );
 }
