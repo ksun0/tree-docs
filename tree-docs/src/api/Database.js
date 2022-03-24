@@ -1,3 +1,5 @@
+import axios from "axios";
+
 /*
  * getDocuments
  * Outputs all documents stored in database (will maybe add authentication later)
@@ -147,7 +149,7 @@ function collapseGraph(root, graph) {
 }
 
 function getDocument(did) {
-    let dummy_data = {
+    var dummy_data = {
         title: "Summit Notes",
         body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porttitor venenatis dictum. Nulla malesuada tellus sed luctus dapibus. Donec ac placerat ipsum, sit amet ultrices urna. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nec accumsan dolor, eu scelerisque ligula. Aenean semper, magna vulputate congue pretium, enim ex aliquam arcu, a dapibus felis massa quis elit. Proin pellentesque rutrum nisl ac placerat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
 
@@ -156,8 +158,39 @@ function getDocument(did) {
         Duis vel nibh et felis pulvinar facilisis ut a lectus. Donec sagittis velit sed ex porttitor, id lobortis tellus lacinia. Ut pretium, est id aliquam sollicitudin, mi augue ullamcorper dolor, a ullamcorper mauris sapien hendrerit diam. Nunc pulvinar mattis magna ut dignissim. Mauris non ligula varius, commodo purus sit amet, feugiat elit. Fusce sit amet velit at est pharetra luctus sed non ipsum. Phasellus rutrum quam id ligula porta, tempor condimentum lectus efficitur. Nunc ut pretium lacus. Sed ultrices mollis nisi eu faucibus. Aenean nec mauris at purus mollis laoreet et vel felis. Aliquam ornare sapien a eros tempor luctus.
         `
     }
+
+    if (did == 3 || did == "3") {
+        dummy_data = {
+            title: "Summit Notes",
+            body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porttitor venenatis dictum. Nulla malesuada tellus sed luctus dapibus. Donec ac placerat ipsum, sit amet ultrices urna. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nec accumsan dolor, eu scelerisque ligula. Aenean semper, magna vulputate congue pretium, enim ex aliquam arcu, a dapibus felis massa quis elit. Proin pellentesque rutrum nisl ac placerat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+
+            Sed cursus dolora orci, vitae pretium risus porta ut. Quisque lobortis erat scelerisque leo convallis, at bibendum mi tempus. Cras suscipit dui a nisi ornare fermentum vel at massa. Maecenas nec fermentum enim, ut porttitor eros. Cras sed egestas justo, at semper massa. Phasellus finibus sem est, id faucibus ipsum mollis et. Curabitur tempor tellus ante, ac hendrerit nisl malesuada ut. Aliquam nec pulvinar tellus. Vivamus et sagittis turpis. Phasellus vehicula augue convallis, maximus sapien semper, placerat augue. Duis at erat ac ante scelerisque vestibulum quis sed quam. Nulla gravida nulla ligula, eget feugiat massa pharetra dignissim. Aliquam ornare dui id felis placerat, sed cursus felis faucibus.
+            
+            Duis vel nibh et felis pulvinar facilisis ut a lectus. Donec sagittis velit sed ex porttitor, id lobortis tellus lacinia. Ut pretium, est id aliquam sollicitudin, mi augue ullamcorper dolor, a ullamcorper mauris sapien hendrerit diam. Nunc pulvinar mattis magna ut dignissim. Mauris non ligula varius, commodo purus sit amet, feugiat elit. Fusce sit amet velit at est pharetra luctus sed non ipsum. Phasellus rutrum quam id ligula porta, tempor condimentum lectus efficitur. Nunc ut pretium lacus. Sed ultrices mollis nisi eu faucibus. Aenean nec mauris at purus mollis laoreet et vel felis. Aliquam ornare sapien a eros tempor luctus.
+            
+            awefwhoi
+            `
+        }
+    }
+
     return dummy_data;
 }
 
+async function getDiff(did1, did2) {
 
-export {getDocuments, getTree, getDocument};
+    let did1body = getDocument(did1).body;
+    let did2body = getDocument(did2).body;
+
+    const promise = axios.post("https://api.diffchecker.com/public/text?output_type=json&email=gsr.coolest@gmail.com", {
+        output_type: "json",
+        email: "gsr.coolest@gmail.com",
+        left: did1body,
+        right: did2body
+    })
+
+    const promiseData = await promise.then((response) => response.data);
+
+    return promiseData;
+}
+
+export {getDocuments, getTree, getDocument, getDiff};

@@ -3,6 +3,7 @@ import Home from "./components/Home";
 import DocumentList from "./components/DocumentList";
 import TreeView from "./components/TreeView";
 import SideTree from "./components/SideTree";
+import DiffView from "./components/DiffView";
 
 import {
   BrowserRouter as Router,
@@ -23,6 +24,8 @@ function App() {
           <Route exact path="/" element={<Home/>} />
 
           <Route exact path="/list" element={<DocumentList/>} />
+
+          <Route exact path="/diff" element={<DiffView/>} />
             
           {/* This route is for about component 
           with exact path "/about", in component 
@@ -33,7 +36,9 @@ function App() {
           with exact path "/contactus", in 
           component props we passes the imported component*/}
           <Route path="/edit" element={<DocumentEditor/>} />
-            
+
+          
+          
         </Routes>
       </Router>
 
