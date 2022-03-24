@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import * as d3 from "d3"
 
 function SideTree(props) {
+  const [is_merge, setIsMerge] = useState(false);
   var navigate = useNavigate();
     // Copyright 2021 Observable, Inc.
     // Released under the ISC license.
@@ -115,8 +116,15 @@ function SideTree(props) {
       
     function handleItemClick(id) {
       console.log("CLICKED");
-      console.log(id);
-      navigate("/edit", { state: { nodeID : id }});
+      console.log(is_merge);
+      let node = state ? state.nodeID : props.nodeID;
+      if (is_merge) {
+        if (node != id) {
+          // Send to merge
+        }
+      } else {
+        navigate("/edit", { state: { nodeID : id }});
+      }
     }
 
       node.on("click", function(d, i) { handleItemClick(i.data.value) });
@@ -129,19 +137,25 @@ function SideTree(props) {
     const ref = useRef();
     useEffect(() => {
         console.log(state);
-        console.log(state.nodeID);
-        let node = state.nodeID ? state.nodeID : props.nodeID;
-        let data = getTree(state.nodeID);
+        let node = state ? state.nodeID : props.nodeID;
+        let data = getTree(node);
         const svgElement = d3.select(ref.current);
         const tree = Tree(data, svgElement);
         console.log(tree);
         // svgElement.append(tree[0]);
-     }, [])
+     }, [is_merge])
 
     return (
          
       <aside class="col-md-3">
           <div class="sidebar">
+          <label style ={{float:"right"}}>Merge Mode</label>
+          <br></br>
+          <br></br>
+          <label class="switch"> 
+            <input type="checkbox" onClick={()=>{setIsMerge(!is_merge); console.log(is_merge);}}/>
+            <span class="slider round"></span>
+          </label>
               <svg ref = {ref} />
           </div>
       </aside>

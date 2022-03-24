@@ -2,10 +2,13 @@ import { getTree } from "../api/Database";
 import { Container } from 'semantic-ui-react'
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import NavBar from "./NavBar";
 import * as d3 from "d3"
 
-function TreeView() {
+function TreeView(props) {
+
+  const [is_merge, setIsMerge] = useState(false);
+  const [selected_node, setSelectedNode] = useState(null);
+
   var navigate = useNavigate();
     // Copyright 2021 Observable, Inc.
     // Released under the ISC license.
@@ -25,7 +28,8 @@ function TreeView() {
       height, // outer height, in pixels
       r = 4, // radius of nodes
       padding = 1, // horizontal padding for first and last column
-      fill = "#6fc754", // fill for nodes
+      fill = "#000", // fill for nodes
+      highlight = "#6fc754",
       fillOpacity, // fill opacity for nodes
       stroke = "#555", // stroke for links
       strokeWidth = 2.5, // stroke width for links
@@ -98,7 +102,7 @@ function TreeView() {
           .attr("transform", d => `translate(${d.y},${d.x})`);
 
       node.append("circle")
-          .attr("fill", d => d.children ? stroke : fill)
+          .attr("fill", d => ((d.data.value == selected_node) && is_merge) ? highlight : fill)
           .attr("r", r);
 
       if (title != null) node.append("title")
@@ -116,8 +120,19 @@ function TreeView() {
       
     function handleItemClick(id) {
       console.log("CLICKED");
-      console.log(id);
-      navigate("/edit", { state: { nodeID : id }});
+      console.log(is_merge);
+      if (is_merge) {
+        if (selected_node == id) {
+          setSelectedNode(null);
+        } else if (selected_node != null) {
+          // Send to merge
+        } else {
+          setSelectedNode(id);
+        }
+        
+      } else {
+        navigate("/edit", { state: { nodeID : id }});
+      }
     }
 
       node.on("click", function(d, i) { handleItemClick(i.data.value) });
@@ -130,39 +145,51 @@ function TreeView() {
     const ref = useRef();
     useEffect(() => {
         console.log(state);
-        console.log(state.nodeID);
-        let data = getTree(state.nodeID);
+        let node = state ? state.nodeID : props.nodeID;
+        let data = getTree(node);
         const svgElement = d3.select(ref.current);
         const tree = Tree(data, svgElement);
         console.log(tree);
         // svgElement.append(tree[0]);
-     }, [])
+     }, [is_merge, selected_node])
 
-    return (
+    return ( 
       <>
-        <NavBar light={true}/>
-        <div id="hero" class="hero overlay subpage-hero tree-hero">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>Tree View</h1>
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="/">Home</a></li>
-                  <li class="breadcrumb-item">Tree View</li>
-                </ol>
-            </div>
-            </div>
-        </div>
-        <main id="main" class="site-main">
-
-          <section class="site-section subpage-site-section section-portfolio">
-            <div class="container">
-              <svg ref = {ref} />
-            </div>
-          </section>
-        </main>
+        <label style ={{float:"right"}}>Merge Mode</label>
+        <br></br>
+        <br></br>
+        <label class="switch"> 
+          <input type="checkbox" onClick={()=>{setIsMerge(!is_merge); console.log(is_merge);}}/>
+          <span class="slider round"></span>
+        </label>
+        <svg ref = {ref} /> 
       </>
+    );
+    // return (
+    //   <>
+    //     <NavBar light={true}/>
+    //     <div id="hero" class="hero overlay subpage-hero tree-hero">
+    //     <div class="hero-content">
+    //         <div class="hero-text">
+    //             <h1>Tree View</h1>
+    //             <ol class="breadcrumb">
+    //               <li class="breadcrumb-item"><a href="/">Home</a></li>
+    //               <li class="breadcrumb-item">Tree View</li>
+    //             </ol>
+    //         </div>
+    //         </div>
+    //     </div>
+    //     <main id="main" class="site-main">
 
-    )
+    //       <section class="site-section subpage-site-section section-portfolio">
+    //         <div class="container">
+    //           <svg ref = {ref} />
+    //         </div>
+    //       </section>
+    //     </main>
+    //   </>
+
+    // )
 }
 
 export default TreeView;
