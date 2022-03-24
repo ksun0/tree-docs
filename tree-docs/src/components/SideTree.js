@@ -2,10 +2,9 @@ import { getTree } from "../api/Database";
 import { Container } from 'semantic-ui-react'
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import NavBar from "./NavBar";
 import * as d3 from "d3"
 
-function SideTree() {
+function SideTree(props) {
   var navigate = useNavigate();
     // Copyright 2021 Observable, Inc.
     // Released under the ISC license.
@@ -131,6 +130,7 @@ function SideTree() {
     useEffect(() => {
         console.log(state);
         console.log(state.nodeID);
+        let node = state.nodeID ? state.nodeID : props.nodeID;
         let data = getTree(state.nodeID);
         const svgElement = d3.select(ref.current);
         const tree = Tree(data, svgElement);
@@ -139,52 +139,12 @@ function SideTree() {
      }, [])
 
     return (
-      <>
-        <NavBar/>
-        <br></br>
-        <br></br>
-        <main id="main" class="site-main">
-        
-        <section class="site-section subpage-site-section section-blog">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8">
-                        <article class="blog-post">
-                        <div class="post-content">
-                                <h3 class="post-title"><a href="blog-post.html">12 Essential Free Sketch Plugins</a></h3>
-                                <p>Sketch Measure helps designers organize and outline their work for developers, project managers, and other team members</p>
-                        </div>
-                        </article>
-                        <article class="blog-post">
-                        <div class="post-content">
-                                <h3 class="post-title"><a href="blog-post.html">12 Essential Free Sketch Plugins</a></h3>
-                                <p>Sketch Measure helps designers organize and outline their work for developers, project managers, and other team members</p>
-                        </div>
-                        </article>
-                        <article class="blog-post">
-                        <div class="post-content">
-                                <h3 class="post-title"><a href="blog-post.html">12 Essential Free Sketch Plugins</a></h3>
-                                <p>Sketch Measure helps designers organize and outline their work for developers, project managers, and other team members</p>
-                        </div>
-                        </article>
-                        <article class="blog-post">
-                        <div class="post-content">
-                                <h3 class="post-title"><a href="blog-post.html">12 Essential Free Sketch Plugins</a></h3>
-                                <p>Sketch Measure helps designers organize and outline their work for developers, project managers, and other team members</p>
-                        </div>
-                        </article>
-
-                    </div>
-                    <aside class="col-md-3">
-                        <div class="sidebar">
-                            <svg ref = {ref} />
-                        </div>
-                    </aside>
-                </div>
-            </div>
-          </section>
-        </main>
-      </>
+         
+      <aside class="col-md-3">
+          <div class="sidebar">
+              <svg ref = {ref} />
+          </div>
+      </aside>
 
     )
 }

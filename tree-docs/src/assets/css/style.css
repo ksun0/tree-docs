@@ -168,9 +168,13 @@ button.btn:focus {
     border-radius: 25px;
 }
 
-.form-control-comment {
-    height: 100px;
+textarea.form-control-title {
+    height: 52px;
     resize: none;
+}
+
+textarea.form-control-body {
+    height: 500px;
 }
 
 .search-form .form-group .form-control {

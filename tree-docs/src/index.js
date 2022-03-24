@@ -5,9 +5,9 @@ import reportWebVitals from './reportWebVitals';
 
 import './assets/css/font.css';
 import './assets/css/responsive.css';
-import './assets/css/style.css';
 import './assets/css/App.css';
 import './assets/css/bootstrap.min.css';
+import './assets/css/style.css';
 
 ReactDOM.render(
   <App/>,

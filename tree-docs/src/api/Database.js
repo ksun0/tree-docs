@@ -57,43 +57,43 @@ function getSummary(did) {
 
 function getTree(root_did) {
     // Need to join Hierarchy, Documents, + Users
-    // let data = [
-    //     {   child_did: 2,
-    //         parent_did: 1,
-    //         author_name: "Bob"
-    //     },
-    //     {   child_did: 3,
-    //         parent_did: 1,
-    //         author_name: "Maria"
-    //     },
-    //     {   child_did: 4,
-    //         parent_did: 2,
-    //         author_name: "Clarisse"
-    //     },
-    //     {   child_did: 5,
-    //         parent_did: 4,
-    //         author_name: "Tom"
-    //     },
-    //     {   child_did: 6,
-    //         parent_did: 1,
-    //         author_name: "Larry"
-    //     },
-    //     {   child_did: 7,
-    //         parent_did: 1,
-    //         author_name: "David"
-    //     },
-    //     {   child_did: 8,
-    //         parent_did: 2,
-    //         author_name: "Anya"
-    //     },
-    // ];
+    let data = [
+        {   child_did: 2,
+            parent_did: 1,
+            author_name: "Bob"
+        },
+        {   child_did: 3,
+            parent_did: 1,
+            author_name: "Maria"
+        },
+        {   child_did: 4,
+            parent_did: 2,
+            author_name: "Clarisse"
+        },
+        {   child_did: 5,
+            parent_did: 4,
+            author_name: "Tom"
+        },
+        {   child_did: 6,
+            parent_did: 1,
+            author_name: "Larry"
+        },
+        {   child_did: 7,
+            parent_did: 1,
+            author_name: "David"
+        },
+        {   child_did: 8,
+            parent_did: 2,
+            author_name: "Anya"
+        },
+    ];
 
-    const xhttp = new XMLHttpRequest();
+    // const xhttp = new XMLHttpRequest();
 
-    xhttp.open("GET", "http://localhost:3000/get_tree/" + root_did, false);
-    xhttp.send();
+    // xhttp.open("GET", "http://localhost:3000/get_tree/" + root_did, false);
+    // xhttp.send();
 
-    const data = JSON.parse(xhttp.responseText);
+    // const data = JSON.parse(xhttp.responseText);
     console.log(data);
 
     let graphRep = data.reduce((graph, record) => {
@@ -144,4 +144,18 @@ function collapseGraph(root, graph) {
              children: children };
 }
 
-export {getDocuments, getTree};
+function getDocument(did) {
+    let dummy_data = {
+        title: "Summit Notes",
+        body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porttitor venenatis dictum. Nulla malesuada tellus sed luctus dapibus. Donec ac placerat ipsum, sit amet ultrices urna. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nec accumsan dolor, eu scelerisque ligula. Aenean semper, magna vulputate congue pretium, enim ex aliquam arcu, a dapibus felis massa quis elit. Proin pellentesque rutrum nisl ac placerat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+
+        Sed cursus dolor orci, vitae pretium risus porta ut. Quisque lobortis erat scelerisque leo convallis, at bibendum mi tempus. Cras suscipit dui a nisi ornare fermentum vel at massa. Maecenas nec fermentum enim, ut porttitor eros. Cras sed egestas justo, at semper massa. Phasellus finibus sem est, id faucibus ipsum mollis et. Curabitur tempor tellus ante, ac hendrerit nisl malesuada ut. Aliquam nec pulvinar tellus. Vivamus et sagittis turpis. Phasellus vehicula augue convallis, maximus sapien semper, placerat augue. Duis at erat ac ante scelerisque vestibulum quis sed quam. Nulla gravida nulla ligula, eget feugiat massa pharetra dignissim. Aliquam ornare dui id felis placerat, sed cursus felis faucibus.
+        
+        Duis vel nibh et felis pulvinar facilisis ut a lectus. Donec sagittis velit sed ex porttitor, id lobortis tellus lacinia. Ut pretium, est id aliquam sollicitudin, mi augue ullamcorper dolor, a ullamcorper mauris sapien hendrerit diam. Nunc pulvinar mattis magna ut dignissim. Mauris non ligula varius, commodo purus sit amet, feugiat elit. Fusce sit amet velit at est pharetra luctus sed non ipsum. Phasellus rutrum quam id ligula porta, tempor condimentum lectus efficitur. Nunc ut pretium lacus. Sed ultrices mollis nisi eu faucibus. Aenean nec mauris at purus mollis laoreet et vel felis. Aliquam ornare sapien a eros tempor luctus.
+        `
+    }
+    return dummy_data;
+}
+
+
+export {getDocuments, getTree, getDocument};

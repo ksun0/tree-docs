@@ -37,28 +37,34 @@ function DocumentList() {
 
         <section class="site-section subpage-site-section section-blog">
             <div class="container">
-            {documents.length ? documents.map((document, index) => {
-                    alt = !alt;
-                    return (
-                        <span key={document.id}>
-                        <ListItemButton selected={alt} component="a" onClick={ () => handleItemClick(document.id) }>
-                        <Container style={{marginTop: "20px", marginBottom: "20px"}}>
-                            <article class="blog-post">
-                            <h3 class="post-title"><FontAwesomeIcon icon={faFile} /> {document.name}</h3>
-                            <div class="post-meta">
-                                <span class="post-author">
-                                <FontAwesomeIcon icon={faUser} />  {document.author}
-                                </span>
-                                <span class="post-date">
-                                    <FontAwesomeIcon icon={faCalendar} /> {document.date}
+                <ul class="portfolio-sorting list-inline text-center">
+                    <li><a href="#" class="btn btn-gray" data-group="list">List</a></li>
+                    <li><a href="#" class="btn btn-gray" data-group="tree">Tree</a></li>
+                </ul>
+                <br></br>
+                <br></br>
+                {documents.length ? documents.map((document, index) => {
+                        alt = !alt;
+                        return (
+                            <span key={document.id}>
+                            <ListItemButton selected={alt} component="a" onClick={ () => handleItemClick(document.id) }>
+                            <Container style={{marginTop: "20px", marginBottom: "20px"}}>
+                                <article class="blog-post">
+                                <h3 class="post-title"><FontAwesomeIcon icon={faFile} /> {document.name}</h3>
+                                <div class="post-meta">
+                                    <span class="post-author">
+                                    <FontAwesomeIcon icon={faUser} />  {document.author}
                                     </span>
-                            </div>
-                            </article>
-                        </Container>
-                        </ListItemButton>
-                        </span>
-                    )
-            }) : <h1>No sections yet!</h1>}
+                                    <span class="post-date">
+                                        <FontAwesomeIcon icon={faCalendar} /> {document.date}
+                                        </span>
+                                </div>
+                                </article>
+                            </Container>
+                            </ListItemButton>
+                            </span>
+                        )
+                }) : <h1>No sections yet!</h1>}
             
             
             </div>
