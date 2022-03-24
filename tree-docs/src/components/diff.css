@@ -1,7 +1,7 @@
 .diff-table {
   font-family: monospace;
   background: #FFFFFF;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   border-collapse: collapse;
 }
 
@@ -27,7 +27,7 @@
 .diff-line {
   white-space: pre-wrap;
   word-break: break-all;
-  line-height: 2rem;
+  line-height: 2.4rem;
   padding-right: 20px;
 }
 
