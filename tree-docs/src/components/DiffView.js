@@ -28,6 +28,7 @@ function DiffView() {
 
         var tempFinal = [];
 
+        // todo: populate equal chunks
         data.rows.forEach((row) => {
             tempFinal.push(Array(row.left.chunks.length).fill(""));
         });
@@ -38,10 +39,13 @@ function DiffView() {
     }, []);
 
     function selectVersion(row, chunk, side) {
+
+        console.log(diff.rows[row].left.chunks[chunk].value)
+
         var tempFinal = [...final];
         tempFinal[row][chunk] = side
-            ? diff.rows[row].left.chunks[chunk].left
-            : diff.rows[row].left.chunks[chunk].right;
+            ? diff.rows[row].right.chunks[chunk].value
+            : diff.rows[row].left.chunks[chunk].value;
         setFinal(tempFinal);
     }
 
@@ -62,54 +66,6 @@ function DiffView() {
             <div style = {{paddingTop: "50px"}}>
                 <div dangerouslySetInnerHTML={{__html: html_ret == null ? '' : html_ret.html}} />    
             </div>
-            
-
-            {/* <div>
-                {diff != null &&
-                    diff.rows.map((value, index) => (
-                        <div>
-                            <div>
-                                {value.left.chunks.map((chunk, chunkIndex) => {
-                                    if (chunk.type === "equal") {
-                                        return (<span>{chunk.value}</span>)
-                                    } else {
-                                        return (
-                                            <a
-                                                onClick={() => selectVersion(
-                                                    index,
-                                                    chunkIndex,
-                                                    false
-                                                )}
-                                            >
-                                                {chunk.value}
-                                            </a>
-                                        )
-                                    }
-                                })}
-                            </div>
-                            <div>
-                                {value.right.chunks.map((chunk, chunkIndex) => {
-                                    if (chunk.type === "equal") {
-                                        return (<span>{chunk.value}</span>)
-                                    } else {
-                                        return (
-                                            <a
-                                                onClick={() => selectVersion(
-                                                    index,
-                                                    chunkIndex,
-                                                    true
-                                                )}
-                                            >
-                                                {chunk.value}
-                                            </a>
-                                        )
-                                    }
-                                })}
-                            </div>
-                            <div>{final != null && final[index].join("")}</div>
-                        </div>
-                    ))}
-            </div> */}
         </>
     );
 }
