@@ -23,6 +23,8 @@ function getDocuments() {
         date: "September 30, 2021",
     };
 
+    let documents = [test1, test2, test3];
+
     // const xhttp = new XMLHttpRequest();
 
     // xhttp.open("GET", "http://localhost:3000/documents", false);
