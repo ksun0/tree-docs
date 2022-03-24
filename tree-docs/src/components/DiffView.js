@@ -42,12 +42,6 @@ function DiffView() {
         setFinal(tempFinal);
     }, []);
 
-    // const selectVersion = (row, chunk, side) => {
-    //     var tempFinal = [...final];
-    //     tempFinal[row][chunk] = side ? diff.rows[row].left.chunks[chunk].left : diff.rows[row].left.chunks[chunk].right;
-    //     setFinal(tempFinal);
-    // }
-
     const [documents] = useState(getDocuments());
 
     let alt = false;
@@ -91,26 +85,27 @@ function DiffView() {
                                     );
                                 })}
                             </div>
-                            {/* <div>
-                            {value.right.chunks.map((chunk, chunkIndex) => {
-                                {
-                                    chunk.type === "equal" ? (
-                                        <span>{chunk.value}</span>
-                                    ) : (
-                                        <a
-                                            onClick={selectVersion(
-                                                index,
-                                                chunkIndex,
-                                                true
-                                            )}
-                                        >
-                                            {chunk.value}
-                                        </a>
-                                    );
-                                }
-                            })}
-                        </div>
-                        <div>{final[index].join("")}</div> */}
+                            <div>
+                                {value.right.chunks.map((chunk, chunkIndex) => {
+                                    {
+                                        chunk.type === "equal" ? (
+                                            <span>{chunk.value}</span>
+                                        ) : (
+                                            <a
+                                                onClick={selectVersion(
+                                                    index,
+                                                    chunkIndex,
+                                                    true
+                                                )}
+                                            >
+                                                {chunk.value}
+                                            </a>
+                                        );
+                                    }
+                                })}
+                            </div>
+                        <div>
+                            {final[index].join("")}</div>
                         </div>
                     ))}
             </div>
