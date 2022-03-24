@@ -47,30 +47,31 @@ function DiffView() {
                 {diff != null &&
                     diff.rows.map((value, index) => (
                         <div>
-                            <div>awef</div>
                             <div>
                                 {value.left.chunks.map((chunk, chunkIndex) => {
-                                    chunk.type === "equal" ? (
-                                        <span>{chunk.value}</span>
-                                    ) : (
-                                        <a
-                                            onClick={() => selectVersion(
-                                                index,
-                                                chunkIndex,
-                                                false
-                                            )}
-                                        >
-                                            {chunk.value}
-                                        </a>
-                                    );
+                                    if (chunk.type === "equal") {
+                                        return (<span>{chunk.value}</span>)
+                                    } else {
+                                        return (
+                                            <a
+                                                onClick={() => selectVersion(
+                                                    index,
+                                                    chunkIndex,
+                                                    false
+                                                )}
+                                            >
+                                                {chunk.value}
+                                            </a>
+                                        )
+                                    }
                                 })}
                             </div>
                             <div>
                                 {value.right.chunks.map((chunk, chunkIndex) => {
-                                    {
-                                        chunk.type === "equal" ? (
-                                            <span>{chunk.value}</span>
-                                        ) : (
+                                    if (chunk.type === "equal") {
+                                        return (<span>{chunk.value}</span>)
+                                    } else {
+                                        return (
                                             <a
                                                 onClick={() => selectVersion(
                                                     index,
@@ -80,7 +81,7 @@ function DiffView() {
                                             >
                                                 {chunk.value}
                                             </a>
-                                        );
+                                        )
                                     }
                                 })}
                             </div>
