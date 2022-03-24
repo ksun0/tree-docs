@@ -52,7 +52,7 @@ function DiffView() {
     return (
         <>
             <NavBar light={true}/>
-            <div id="hero" class="hero overlay subpage-hero blog-hero">
+            <div id="hero" class="hero overlay subpage-hero merge-hero">
             <div class="hero-content">
                 <div class="hero-text">
                     <h1>Merge Documents</h1>

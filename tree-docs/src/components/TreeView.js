@@ -125,7 +125,7 @@ function TreeView(props) {
         if (selected_node == id) {
           setSelectedNode(null);
         } else if (selected_node != null) {
-          // Send to merge
+          navigate("/diff");
         } else {
           setSelectedNode(id);
         }

@@ -19,7 +19,7 @@ function DocumentEditor() {
     return (
         <>
         <NavBar light={true}/>
-        <div id="hero" class="hero overlay subpage-hero blog-hero">
+        <div id="hero" class="hero overlay subpage-hero edit-hero">
             <div class="hero-content">
                 <div class="hero-text">
                     <h1>Edit Document</h1>

@@ -898,6 +898,14 @@ html, body {
     background: url(../img/contact-hero.jpg) no-repeat center / cover;     
 }
 
+.edit-hero {
+    background: url(../img/edit-hero.jpeg) no-repeat center / cover;     
+}
+
+.merge-hero {
+    background: url(../img/merge-hero.jpg) no-repeat center / cover;     
+}
+
 /* SITEMAIN
 ================================================== */
 /* site-section */
