@@ -116,6 +116,15 @@ p + p {
     color: #fff;  
 }
 
+.btn-save {
+    margin-left: 350px;
+}
+
+.btn-red {
+    background-color: #e65151;
+    color: #fff;  
+}
+
 .btn:hover,
 button.btn:hover,
 .btn:focus,
@@ -166,6 +175,11 @@ button.btn:focus {
     min-width: 60px;
     font-size: 16px;
     border-radius: 25px;
+}
+
+textarea.password {
+    color: transparent; 
+    text-shadow: 0 0 8px rgba(0,0,0,0.5);
 }
 
 textarea.form-control-title {
@@ -904,6 +918,10 @@ html, body {
 
 .merge-hero {
     background: url(../img/merge-hero.jpg) no-repeat center / cover;     
+}
+
+.login-hero {
+    background: url(../img/login-hero.jpg) no-repeat center / cover;     
 }
 
 /* SITEMAIN

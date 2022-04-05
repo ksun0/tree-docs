@@ -12,7 +12,7 @@ function Home() {
             <div class="hero-text">
                 <h1>Rethink Document Collaboration</h1>
                 <br></br>
-                <a href="/list" class="btn btn-border">Start Here</a>
+                <a href="/login" class="btn btn-border">Start Here</a>
             </div>
         </div>
         </div>
