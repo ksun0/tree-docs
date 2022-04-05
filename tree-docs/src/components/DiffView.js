@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { getDiff } from "../api/Database";
+import { getDiff, getDiff_html } from "../api/Database";
 import NavBar from "../components/NavBar";
+import css from "../components/diff.css";
 
 function DiffView() {
     // const [searchParams] = useSearchParams();
@@ -13,6 +14,7 @@ function DiffView() {
 
     const [diff, setDiff] = useState(null);
     const [final, setFinal] = useState(null);
+    const [html_ret, setHtml]  = useState(null);
 
     useEffect(async () => {
         const data = await getDiff(did1, did2);

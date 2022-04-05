@@ -5,18 +5,20 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar, faUser, faFolderBlank, faFile } from '@fortawesome/free-solid-svg-icons'
 import NavBar from "./NavBar";
+import TreeView from "./TreeView";
 import { Container } from 'semantic-ui-react';
 
 function DocumentList() {
 
     const [documents] = useState(getDocuments());
+    const [is_list_view, setIsListView] = useState(true);
 
     let alt = false;
     let navigate = useNavigate();
 
     function handleItemClick(id) {
         console.log(id);
-        navigate("/tree", { state: { nodeID : id }});
+        navigate("/edit", { state: { nodeID : id }});
     }
 
     return (
@@ -38,11 +40,12 @@ function DocumentList() {
         <section class="site-section subpage-site-section section-blog">
             <div class="container">
                 <ul class="portfolio-sorting list-inline text-center">
-                    <li><a href="#" class="btn btn-gray" data-group="list">List</a></li>
-                    <li><a href="#" class="btn btn-gray" data-group="tree">Tree</a></li>
+                    <li><button onClick={() => setIsListView(true)} class={is_list_view ? "btn btn-green" : "btn btn-gray"} data-group="list">List</button></li>
+                    <li><button onClick={() => setIsListView(false)} class={is_list_view ? "btn btn-gray" : "btn btn-green"} data-group="tree">Tree</button></li>
                 </ul>
                 <br></br>
                 <br></br>
+                <div id="list" style={is_list_view ? {display: "block"} : {display: "none"}}>
                 {documents.length ? documents.map((document, index) => {
                         alt = !alt;
                         return (
@@ -65,12 +68,13 @@ function DocumentList() {
                             </span>
                         )
                 }) : <h1>No sections yet!</h1>}
-            
-            
+            </div>
+            <div id="tree" style={is_list_view ? {display: "none"} : {display: "block"}}>
+                <TreeView nodeID="1"/>
+            </div>
             </div>
         </section>
         </main>
-
         </>
     );
 }
