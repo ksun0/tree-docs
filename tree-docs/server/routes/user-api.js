@@ -172,7 +172,7 @@ router.get('/get_document/:did', async(req, res) => {
     });
 });
 
-router.post('/add_document/:did', async(req, res) => {
+router.post('/add_document/', async(req, res) => {
     // Reading did from the URL
 
     const data = req.body;
@@ -180,16 +180,11 @@ router.post('/add_document/:did', async(req, res) => {
     const author = data.author;
     const comment = data.comment;
     const title = data.title;
+    const parent = data.parent != undefined ? data.parent : "NULL";
 
     sql.query(`INSERT INTO treedocs.document (doc_name, author, comment, title) VALUES ($(doc_name), $(author), $(comment), $(title));
     INSERT INTO treedocs.hierarchy_parent (DID, parent_DID) VALUES (LAST_INSERT_ID(), $(parent))  `).then(rows => {
-        console.log(rows);
-        for(var i = 0; i < rows.length; i++) {
-            data.title = rows[i].title;
-            data.text_content = rows[i].text_content;
-        }
-        console.log(rows[i]);
-        res.json(data);
+        res.json({});
     });
 });
 
