@@ -7,8 +7,9 @@ import SideTree from "./SideTree";
 
 function DocumentEditor() {
 
-    const { state } = useLocation();
-    let document;
+    const location = useLocation();
+    const [titleText, setTitleText] = useState("");
+    const [bodyText, setBodyText] = useState("");
 
     let navigate = useNavigate();
 
@@ -17,22 +18,30 @@ function DocumentEditor() {
     const body = useRef();
 
     function onDelete() {
-        // Go to delete page with state.nodeID
-        const id = state.nodeID;
+        // Go to delete page with location.nodeID
+        const id = location.state.nodeID;
         console.log("akjdlsfja");
     }
 
     function onSave() {
-        // Go to delete page with state.nodeID
+        // Go to delete page with location.nodeID
         const saveTitle = title.current.value;
         const bodyTitle = body.current.value;
     }
 
+    const loadData = async () => {
+        console.log(location.state.nodeID);
+        const data = await getDocument(location.state.nodeID);
+        console.log(data.title);
+        console.log(data.text_content);
+        setTitleText(data.title);
+        setBodyText(data.text_content);
+        console.log(data);
+    }
+
     useEffect(() => {
-        console.log(state);
-        console.log(state.nodeID);
-        document = getDocument(state.nodeID);
-     }, [])
+        loadData();
+     }, []);
 
     return (
         <>
@@ -56,18 +65,18 @@ function DocumentEditor() {
                     <div class="col-md-8">
                             <div class="form-group">
                             <label style={{fontSize: "20px", paddingBottom: "5px"}}for="title">Title:</label>
-                              <textarea class="form-control form-control-title" id="title" ref={title}>{getDocument(2).title}</textarea>
+                              <textarea class="form-control form-control-title" id="title" ref={title} value = {titleText}></textarea>
                             </div>
                             <br></br>
                             <div class="form-group">
                               <label style={{fontSize: "20px", paddingBottom: "5px"}} for="body">Body:</label>
-                              <textarea class="form-control form-control-body" id="body" ref={body}>{getDocument(2).body}</textarea>
+                              <textarea class="form-control form-control-body" id="body" ref={body} value ={bodyText} ></textarea>
                             </div>
                             <br></br>
                             <button class="btn btn-red" onClick={() => onDelete()}>Delete</button>
                             <button class="btn btn-green btn-save" onClick={() => onSave()}>Save</button>
                     </div>
-                <SideTree nodeID={state.nodeID}/>
+                <SideTree nodeID={location.state.nodeID}/>
                 </div>
             </div>
             

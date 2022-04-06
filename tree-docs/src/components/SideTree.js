@@ -120,7 +120,7 @@ function SideTree(props) {
       let node = state ? state.nodeID : props.nodeID;
       if (is_merge) {
         if (node != id) {
-          navigate("/diff");
+          navigate("/diff?did1=" + state.nodeID + "&did2=" + id);
         }
       } else {
         navigate("/edit", { state: { nodeID : id }});

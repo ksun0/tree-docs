@@ -155,6 +155,43 @@ router.get('/get_tree/:did', async(req, res) => {
     });
 });
 
+router.get('/get_document/:did', async(req, res) => {
+    // Reading did from the URL
+
+    const did = req.params.did;
+    var data = {};
+
+    sql.query(`SELECT title, text_content FROM treedocs.document NATURAL JOIN treedocs.document_content WHERE DID=${did}
+    `).then(rows => {
+        for(var i = 0; i < rows.length; i++) {
+            data.title = rows[i].title;
+            data.text_content = rows[i].text_content;
+        }
+        console.log(data);
+        res.json(data);
+    });
+});
+
+router.post('/add_document/:did', async(req, res) => {
+    // Reading did from the URL
+
+    const data = req.body;
+    const doc_name = data.doc_name;
+    const author = data.author;
+    const comment = data.comment;
+    const title = data.title;
+
+    sql.query(`INSERT INTO treedocs.document (doc_name, author, comment, title) VALUES ($(doc_name), $(author), $(comment), $(title));
+    INSERT INTO treedocs.hierarchy_parent (DID, parent_DID) VALUES (LAST_INSERT_ID(), $(parent))  `).then(rows => {
+        console.log(rows);
+        for(var i = 0; i < rows.length; i++) {
+            data.title = rows[i].title;
+            data.text_content = rows[i].text_content;
+        }
+        console.log(rows[i]);
+        res.json(data);
+    });
+});
 
 
 // export our router to be mounted by the parent application

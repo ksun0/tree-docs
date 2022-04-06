@@ -6,33 +6,33 @@ import axios from "axios";
  * TODO: Implement document
  */
 function getDocuments() {
-    let test1 = {
-        id: 1,
-        name: "Test 1",
-        author: "John Doe",
-        date: "September 30, 2021",
-    };
-    let test2 = {
-        id: 2,
-        name: "Test 2",
-        author: "Sara Ma",
-        date: "September 30, 2021",
-    };
-    let test3 = {
-        id: 3,
-        name: "Test 3",
-        author: "Allison Smith",
-        date: "September 30, 2021",
-    };
+    // let test1 = {
+    //     id: 1,
+    //     name: "Test 1",
+    //     author: "John Doe",
+    //     date: "September 30, 2021",
+    // };
+    // let test2 = {
+    //     id: 2,
+    //     name: "Test 2",
+    //     author: "Sara Ma",
+    //     date: "September 30, 2021",
+    // };
+    // let test3 = {
+    //     id: 3,
+    //     name: "Test 3",
+    //     author: "Allison Smith",
+    //     date: "September 30, 2021",
+    // };
 
-    let documents = [test1, test2, test3];
+    // let documents = [test1, test2, test3];
 
-    // const xhttp = new XMLHttpRequest();
+    const xhttp = new XMLHttpRequest();
 
-    // xhttp.open("GET", "http://localhost:3000/documents", false);
-    // xhttp.send();
+    xhttp.open("GET", "http://localhost:3000/documents", false);
+    xhttp.send();
 
-    // const documents = JSON.parse(xhttp.responseText);
+    const documents = JSON.parse(xhttp.responseText);
     return documents;
 }
 
@@ -122,24 +122,33 @@ function collapseGraph(root, graph) {
 }
 
 function getDocument(did) {
-    var dummy_data = {
-        title: "Summit Notes",
-        body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porttitor venenatis dictum. Nulla malesuada tellus sed luctus dapibus. Donec ac placerat ipsum, sit amet ultrices urna. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nec accumsan dolor, eu scelerisque ligula. Aenean semper, magna vulputate congue pretium, enim ex aliquam arcu, a dapibus felis massa quis elit. Proin pellentesque rutrum nisl ac placerat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-        Sed cursus dolor orci, vitae pretium risus porta ut. Quisque lobortis erat scelerisque leo convallis, at bibendum mi tempus. Cras suscipit dui a nisi ornare fermentum vel at massa. Maecenas nec fermentum enim, ut porttitor eros. Cras sed egestas justo, at semper massa. Phasellus finibus sem est, id faucibus ipsum mollis et. Curabitur tempor tellus ante, ac hendrerit nisl malesuada ut. Aliquam nec pulvinar tellus. Vivamus et sagittis turpis. Phasellus vehicula augue convallis, maximus sapien semper, placerat augue. Duis at erat ac ante scelerisque vestibulum quis sed quam. Nulla gravida nulla ligula, eget feugiat massa pharetra dignissim. Aliquam ornare dui id felis placerat, sed cursus felis faucibus.
-        Duis vel nibh et felis pulvinar facilisis ut a lectus. Donec sagittis velit sed ex porttitor, id lobortis tellus lacinia. Ut pretium, est id aliquam sollicitudin, mi augue ullamcorper dolor, a ullamcorper mauris sapien hendrerit diam. Nunc pulvinar mattis magna ut dignissim. Mauris non ligula varius, commodo purus sit amet, feugiat elit. Fusce sit amet velit at est pharetra luctus sed non ipsum. Phasellus rutrum quam id ligula porta, tempor condimentum lectus efficitur. Nunc ut pretium lacus. Sed ultrices mollis nisi eu faucibus. Aenean nec mauris at purus mollis laoreet et vel felis. Aliquam ornare sapien a eros tempor luctus.`,
-    };
+    // var dummy_data = {
+    //     title: "Summit Notes",
+    //     body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porttitor venenatis dictum. Nulla malesuada tellus sed luctus dapibus. Donec ac placerat ipsum, sit amet ultrices urna. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nec accumsan dolor, eu scelerisque ligula. Aenean semper, magna vulputate congue pretium, enim ex aliquam arcu, a dapibus felis massa quis elit. Proin pellentesque rutrum nisl ac placerat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+    //     Sed cursus dolor orci, vitae pretium risus porta ut. Quisque lobortis erat scelerisque leo convallis, at bibendum mi tempus. Cras suscipit dui a nisi ornare fermentum vel at massa. Maecenas nec fermentum enim, ut porttitor eros. Cras sed egestas justo, at semper massa. Phasellus finibus sem est, id faucibus ipsum mollis et. Curabitur tempor tellus ante, ac hendrerit nisl malesuada ut. Aliquam nec pulvinar tellus. Vivamus et sagittis turpis. Phasellus vehicula augue convallis, maximus sapien semper, placerat augue. Duis at erat ac ante scelerisque vestibulum quis sed quam. Nulla gravida nulla ligula, eget feugiat massa pharetra dignissim. Aliquam ornare dui id felis placerat, sed cursus felis faucibus.
+    //     Duis vel nibh et felis pulvinar facilisis ut a lectus. Donec sagittis velit sed ex porttitor, id lobortis tellus lacinia. Ut pretium, est id aliquam sollicitudin, mi augue ullamcorper dolor, a ullamcorper mauris sapien hendrerit diam. Nunc pulvinar mattis magna ut dignissim. Mauris non ligula varius, commodo purus sit amet, feugiat elit. Fusce sit amet velit at est pharetra luctus sed non ipsum. Phasellus rutrum quam id ligula porta, tempor condimentum lectus efficitur. Nunc ut pretium lacus. Sed ultrices mollis nisi eu faucibus. Aenean nec mauris at purus mollis laoreet et vel felis. Aliquam ornare sapien a eros tempor luctus.`,
+    // };
 
-    if (did == 3 || did == "3") {
-        dummy_data = {
-            title: "Summit Notes",
-            body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porttitor venenatis dictum. Nulla malesuada tellus sed luctus dapibus. Donec ac placerat ipsum, sit amet ultrices urna. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nec accumsan dolor, eu scelerisque ligula. Aenean semper, magna vulputate congue pretium, enim ex aliquam arcu, a dapibus felis massa quis elit. Proin pellentesque rutrum nisl ac placerat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-            Sed cursus dolora orci, vitae risus porta ut. Quisque lobortis erat scelerisque leo convallis, at bibendum mi tempus. Cras suscipit dui a nisi ornare fermentum vel at massa. Maecenas nec fermentum enim, ut porttitor eros. Cras sed egestas justo, at semper massa. Phasellus finibus sem est, id faucibus ipsum mollis et. Curabitur tempor tellus ante, ac hendrerit nisl malesuada ut. Aliquam nec pulvinar tellus. Vivamus et sagittis turpis. Phasellus vehicula augue convallis, maximus sapien semper, placerat augue. Duis at erat ac ante scelerisque vestibulum quis sed quam. Nulla gravida nulla ligula, eget feugiat massa pharetra dignissim. Aliquam ornare dui id felis placerat, sed cursus felis faucibus.
-            Duis vel nibh et felis pulvinar facilisis ut a lectus. Donec sagittis velit sed ex porttitor, id lobortis tellus lacinia. Ut pretium, est id aliquam sollicitudin, mi augue ullamcorper dolor, a ullamcorper mauris sapien hendrerit diam. Nunc pulvinar mattis magna ut dignissim. Mauris non ligula varius, commodo purus sit amet, feugiat elit. Fusce sit amet velit at est pharetra luctus sed non ipsum. Phasellus rutrum quam id ligula porta, tempor condimentum lectus efficitur. Nunc ut pretium lacus. Sed ultrices mollis nisi eu faucibus. Aenean nec mauris at purus mollis laoreet et vel felis. Aliquam ornare sapien a eros tempor luctus.
-            awefwhoi`,
-        };
-    }
+    // if (did == 3 || did == "3") {
+    //     dummy_data = {
+    //         title: "Summit Notes",
+    //         body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porttitor venenatis dictum. Nulla malesuada tellus sed luctus dapibus. Donec ac placerat ipsum, sit amet ultrices urna. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nec accumsan dolor, eu scelerisque ligula. Aenean semper, magna vulputate congue pretium, enim ex aliquam arcu, a dapibus felis massa quis elit. Proin pellentesque rutrum nisl ac placerat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+    //         Sed cursus dolora orci, vitae risus porta ut. Quisque lobortis erat scelerisque leo convallis, at bibendum mi tempus. Cras suscipit dui a nisi ornare fermentum vel at massa. Maecenas nec fermentum enim, ut porttitor eros. Cras sed egestas justo, at semper massa. Phasellus finibus sem est, id faucibus ipsum mollis et. Curabitur tempor tellus ante, ac hendrerit nisl malesuada ut. Aliquam nec pulvinar tellus. Vivamus et sagittis turpis. Phasellus vehicula augue convallis, maximus sapien semper, placerat augue. Duis at erat ac ante scelerisque vestibulum quis sed quam. Nulla gravida nulla ligula, eget feugiat massa pharetra dignissim. Aliquam ornare dui id felis placerat, sed cursus felis faucibus.
+    //         Duis vel nibh et felis pulvinar facilisis ut a lectus. Donec sagittis velit sed ex porttitor, id lobortis tellus lacinia. Ut pretium, est id aliquam sollicitudin, mi augue ullamcorper dolor, a ullamcorper mauris sapien hendrerit diam. Nunc pulvinar mattis magna ut dignissim. Mauris non ligula varius, commodo purus sit amet, feugiat elit. Fusce sit amet velit at est pharetra luctus sed non ipsum. Phasellus rutrum quam id ligula porta, tempor condimentum lectus efficitur. Nunc ut pretium lacus. Sed ultrices mollis nisi eu faucibus. Aenean nec mauris at purus mollis laoreet et vel felis. Aliquam ornare sapien a eros tempor luctus.
+    //         awefwhoi`,
+    //     };
+    // }
 
-    return dummy_data;
+    // return dummy_data;
+
+    const xhttp = new XMLHttpRequest();
+
+    xhttp.open("GET", "http://localhost:3000/get_document/" + did, false);
+    xhttp.send();
+
+    const data = JSON.parse(xhttp.responseText);
+    console.log(data);
+    return data;
 }
 
 async function getDiff(did1, did2) {
