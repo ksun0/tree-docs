@@ -152,8 +152,8 @@ function getDocument(did) {
 }
 
 async function getDiff(did1, did2) {
-    let did1body = getDocument(did1).body;
-    let did2body = getDocument(did2).body;
+    let did1body = await getDocument(did1).text_content;
+    let did2body = await getDocument(did2).text_content;
 
     const promise = axios.post(
         "https://api.diffchecker.com/public/text?output_type=json&email=gsr.coolest@gmail.com",
