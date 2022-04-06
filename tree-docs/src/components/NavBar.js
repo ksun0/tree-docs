@@ -18,7 +18,6 @@ function NavBar(props) {
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/">Home</a></li>               
                         <li><a href="/list">Documents</a></li>
-
                     </ul>
 
                 </div>

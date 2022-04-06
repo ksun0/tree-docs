@@ -37,13 +37,8 @@ function App() {
           component props we passes the imported component*/}
           <Route path="/edit" element={<DocumentEditor/>} />
 
-          
-          
         </Routes>
       </Router>
-
-
-
       
     </>
   );
