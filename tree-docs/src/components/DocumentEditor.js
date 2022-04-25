@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
-import { getDocument } from '../api/Database';
+import { getDocument, addDocument, deleteDocument } from '../api/Database';
 import { useNavigate } from "react-router-dom";
 import NavBar from "./NavBar";
 import SideTree from "./SideTree";
@@ -10,6 +10,7 @@ function DocumentEditor() {
     const location = useLocation();
     const [titleText, setTitleText] = useState("");
     const [bodyText, setBodyText] = useState("");
+    const [docName, setDocName] = useState("");
 
     let navigate = useNavigate();
 
@@ -20,13 +21,15 @@ function DocumentEditor() {
     function onDelete() {
         // Go to delete page with location.nodeID
         const id = location.state.nodeID;
-        console.log("akjdlsfja");
+        deleteDocument(id);
     }
 
     function onSave() {
         // Go to delete page with location.nodeID
         const saveTitle = title.current.value;
-        const bodyTitle = body.current.value;
+        const saveBody = body.current.value;
+        addDocument(docName, 1, "", saveTitle, location.state.nodeID, saveBody);
+        
     }
 
     const loadData = async () => {
@@ -37,6 +40,7 @@ function DocumentEditor() {
         setTitleText(data.title);
         setBodyText(data.text_content);
         console.log(data);
+        setDocName(data.doc_name);
     }
 
     useEffect(() => {

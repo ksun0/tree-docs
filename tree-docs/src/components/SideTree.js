@@ -24,7 +24,7 @@ function SideTree(props) {
       width = 1000, // outer width, in pixels
       height, // outer height, in pixels
       r = 4, // radius of nodes
-      padding = 1, // horizontal padding for first and last column
+      padding = 0.25, // horizontal padding for first and last column
       fill = "#555", // fill for nodes
       highlight = "#6fc754",
       fillOpacity, // fill opacity for nodes
@@ -115,8 +115,6 @@ function SideTree(props) {
           .attr("stroke-width", haloWidth);
       
     function handleItemClick(id) {
-      console.log("CLICKED");
-      console.log(is_merge);
       let node = state ? state.nodeID : props.nodeID;
       if (is_merge) {
         if (node != id) {
@@ -139,9 +137,9 @@ function SideTree(props) {
         console.log(state);
         let node = state ? state.nodeID : props.nodeID;
         let data = getTree(node);
+        console.log(data)
         const svgElement = d3.select(ref.current);
         const tree = Tree(data, svgElement);
-        console.log(tree);
         // svgElement.append(tree[0]);
      }, [is_merge])
 

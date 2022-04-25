@@ -1,10 +1,12 @@
 const express = require("express");
 const sql = require("../db.js");
+const bodyParser = require('body-parser')
 
 // create a new express-promise-router
 // this has the same API as the normal express router except
 // it allows you to use async functions as route handlers
-const router = express.Router()
+const router = express.Router();
+const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 /*
     USERS
@@ -161,29 +163,46 @@ router.get('/get_document/:did', async(req, res) => {
     const did = req.params.did;
     var data = {};
 
-    sql.query(`SELECT title, text_content FROM treedocs.document NATURAL JOIN treedocs.document_content WHERE DID=${did}
+    sql.query(`SELECT title, text_content, doc_name FROM treedocs.document NATURAL JOIN treedocs.document_content WHERE DID=${did}
     `).then(rows => {
         for(var i = 0; i < rows.length; i++) {
             data.title = rows[i].title;
             data.text_content = rows[i].text_content;
+            data.doc_name = rows[i].doc_name;
         }
         console.log(data);
         res.json(data);
     });
 });
 
-router.post('/add_document/', async(req, res) => {
-    // Reading did from the URL
-
+router.post('/add_document/', urlencodedParser, async(req, res) => {
     const data = req.body;
+    console.log(data);
     const doc_name = data.doc_name;
     const author = data.author;
     const comment = data.comment;
     const title = data.title;
     const parent = data.parent != undefined ? data.parent : "NULL";
+    const text_content = data.text_content;
 
-    sql.query(`INSERT INTO treedocs.document (doc_name, author, comment, title) VALUES ($(doc_name), $(author), $(comment), $(title));
-    INSERT INTO treedocs.hierarchy_parent (DID, parent_DID) VALUES (LAST_INSERT_ID(), $(parent))  `).then(rows => {
+    sql.query(`INSERT INTO treedocs.document (doc_name, author, comment, title) VALUES ("${doc_name}", ${author}, "${comment}", "${title}");
+    INSERT INTO treedocs.hierarchy_parent (DID, parent_DID) VALUES (LAST_INSERT_ID(), ${parent});
+    INSERT INTO treedocs.document_content (DID, text_content) VALUES (LAST_INSERT_ID(), "${text_content}");
+  `).then(rows => {
+        res.json({});
+    });
+});
+
+router.post('/delete_document/', urlencodedParser, async(req, res) => {
+    const data = req.body;
+    console.log(data);
+    const did = data.did;
+
+    sql.query(`
+    DELETE FROM treedocs.document_content WHERE DID = ${did};
+    DELETE FROM treedocs.hierarchy_parent WHERE DID = ${did};
+    DELETE FROM treedocs.document WHERE DID = ${did};
+  `).then(rows => {
         res.json({});
     });
 });

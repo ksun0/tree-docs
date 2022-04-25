@@ -67,11 +67,13 @@ function DocumentList() {
                             </ListItemButton>
                             </span>
                         )
-                }) : <h1>No sections yet!</h1>}
+                }) : <h1>No documents yet!</h1>}
             </div>
-            <div id="tree" style={is_list_view ? {display: "none"} : {display: "block"}}>
-                <TreeView nodeID="1"/>
-            </div>
+            {documents.length ? 
+                <div id="tree" style={is_list_view ? {display: "none"} : {display: "block"}}>
+                    <TreeView nodeID={documents[0].id} />
+                </div> : <h1>No documents yet!</h1>
+            }
             </div>
         </section>
         </main>

@@ -33,6 +33,7 @@ function getDocuments() {
     xhttp.send();
 
     const documents = JSON.parse(xhttp.responseText);
+    console.log(documents);
     return documents;
 }
 
@@ -59,22 +60,22 @@ function getSummary(did) {}
 
 function getTree(root_did) {
     // Need to join Hierarchy, Documents, + Users
-    let data = [
-        { child_did: 2, parent_did: 1, author_name: "Bob" },
-        { child_did: 3, parent_did: 1, author_name: "Maria" },
-        { child_did: 4, parent_did: 2, author_name: "Clarisse" },
-        { child_did: 5, parent_did: 4, author_name: "Tom" },
-        { child_did: 6, parent_did: 1, author_name: "Larry" },
-        { child_did: 7, parent_did: 1, author_name: "David" },
-        { child_did: 8, parent_did: 2, author_name: "Anya" },
-    ];
+    // let data = [
+    //     { child_did: 2, parent_did: 1, author_name: "Bob" },
+    //     { child_did: 3, parent_did: 1, author_name: "Maria" },
+    //     { child_did: 4, parent_did: 2, author_name: "Clarisse" },
+    //     { child_did: 5, parent_did: 4, author_name: "Tom" },
+    //     { child_did: 6, parent_did: 1, author_name: "Larry" },
+    //     { child_did: 7, parent_did: 1, author_name: "David" },
+    //     { child_did: 8, parent_did: 2, author_name: "Anya" },
+    // ];
 
-    // const xhttp = new XMLHttpRequest();
+    const xhttp = new XMLHttpRequest();
 
-    // xhttp.open("GET", "http://localhost:3000/get_tree/" + root_did, false);
-    // xhttp.send();
+    xhttp.open("GET", "http://localhost:3000/get_tree/" + root_did, false);
+    xhttp.send();
 
-    // const data = JSON.parse(xhttp.responseText);
+    const data = JSON.parse(xhttp.responseText);
     console.log(data);
 
     let graphRep = data.reduce((graph, record) => {
@@ -90,6 +91,10 @@ function getTree(root_did) {
         return graph;
     }, {});
 
+    if (Object.keys(graphRep).length == 0) {
+        return {name: "root", value: root_did};
+    }
+
     let root = 0;
     for (const [key, value] of Object.entries(graphRep)) {
         if (value.indegree === 0) {
@@ -97,9 +102,6 @@ function getTree(root_did) {
             break;
         }
     }
-
-    console.log(root);
-    console.log(graphRep);
 
     let ret = collapseGraph(root, graphRep);
     ret.name = "root";
@@ -110,7 +112,7 @@ function getTree(root_did) {
 }
 
 function collapseGraph(root, graph) {
-    if (graph[root].children.length < 1) {
+    if (graph[root] == undefined || graph[root].children.length < 1) {
         return { value: root, name: graph[root].author_name };
     }
 
@@ -170,4 +172,55 @@ async function getDiff(did1, did2) {
     return promiseData;
 }
 
-export { getDocuments, getTree, getDocument, getDiff };
+function addDocument(doc_name, author, comment, title, parent, text_content) {
+    const xhttp = new XMLHttpRequest();
+
+    const params = {
+        doc_name,
+        author,
+        comment,
+        title,
+        parent,
+        text_content
+    }
+    
+    console.log(params);
+
+    // Turn the data object into an array of URL-encoded key/value pairs.
+    let urlEncodedData = "", urlEncodedDataPairs = [], name;
+    for( name in params ) {
+        urlEncodedDataPairs.push(encodeURIComponent(name)+'='+encodeURIComponent(params[name]));
+    }
+    urlEncodedData = urlEncodedDataPairs.join("&");
+    xhttp.open("POST", "http://localhost:3000/add_document/", false);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send(urlEncodedData);
+
+    const data = JSON.parse(xhttp.responseText);
+    console.log(data);
+    return data;
+}
+
+function deleteDocument(did) {
+    const xhttp = new XMLHttpRequest();
+
+    const params = {did};
+    
+    console.log(params);
+
+    // Turn the data object into an array of URL-encoded key/value pairs.
+    let urlEncodedData = "", urlEncodedDataPairs = [], name;
+    for( name in params ) {
+        urlEncodedDataPairs.push(encodeURIComponent(name)+'='+encodeURIComponent(params[name]));
+    }
+    urlEncodedData = urlEncodedDataPairs.join("&");
+    xhttp.open("POST", "http://localhost:3000/delete_document/", false);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send(urlEncodedData);
+
+    const data = JSON.parse(xhttp.responseText);
+    console.log(data);
+    return data;
+}
+
+export { getDocuments, getTree, getDocument, getDiff, addDocument, deleteDocument };

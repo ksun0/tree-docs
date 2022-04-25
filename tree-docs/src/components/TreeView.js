@@ -144,12 +144,10 @@ function TreeView(props) {
 
     const ref = useRef();
     useEffect(() => {
-        console.log(state);
         let node = state ? state.nodeID : props.nodeID;
         let data = getTree(node);
         const svgElement = d3.select(ref.current);
         const tree = Tree(data, svgElement);
-        console.log(tree);
         // svgElement.append(tree[0]);
      }, [is_merge, selected_node])
 
